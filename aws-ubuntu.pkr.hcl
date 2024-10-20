@@ -7,12 +7,12 @@ packer {
   }
 }
 source "amazon-ebs" "ubuntu" {
-  ami_name      = "learn-packer-linux-aws"
+  ami_name      = "learn-packer-linux-aws-test"
   instance_type = "t2.micro"
-  region        = "us-west-2"
+  region        = "ap-southeast-2"
   source_ami_filter {
     filters = {
-      name                = "ubuntu/images/*ubuntu-jammy-22.04-amd64-server-*"
+      name                = "ubuntu/images/hvm-ssd/ubuntu-jammy-22.04-amd64-server-*"
       root-device-type    = "ebs"
       virtualization-type = "hvm"
     }
@@ -22,7 +22,7 @@ source "amazon-ebs" "ubuntu" {
   ssh_username = "ubuntu"
 }
 build {
-  name    = "learn-packer"
+  name = "learn-packer"
   sources = [
     "source.amazon-ebs.ubuntu"
   ]
