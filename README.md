@@ -1,11 +1,13 @@
 # Custom_AMI_PackerThis lab will walk you through updating a Packer HCL Template. It uses the amazon-ebs source to create a custom image in the us-west-2 region of AWS.
 
-Duration: 30 minutes
+Step  by step---
 
 Task 1: Create a Source Block
 Task 2: Validate the Packer Template
 Task 3: Create a Builder Block
 Task 4: Build a new Image using Packer
+
+
 Creating a Packer Template
 mkdir packer_templates
 cd packer_templates
@@ -13,6 +15,7 @@ Task 1: Create a Source Block
 Source blocks define what kind of virtualization to use for the image, how to launch the image and how to connect to the image. Sources can be used across multiple builds. We will use the amazon-ebs source configuration to launch a t3.micro AMI in the us-west-2 region.
 
 Step 1.1.1
+
 Create a aws-ubuntu.pkr.hcl file with the following Packer source block and required_plugins.
 
 packer {
@@ -39,10 +42,13 @@ source "amazon-ebs" "ubuntu" {
   }
   ssh_username = "ubuntu"
 }
+
+
 Step 1.1.2
 The packer init command is used to download Packer plugin binaries. This is the first command that should be executed when working with a new or existing template. This command is always safe to run multiple times.
 
 packer init aws-ubuntu.pkr.hcl
+
 Task 2: Validate the Packer Template
 Packer templates can be auto formatted and validated via the Packer command line.
 
@@ -51,6 +57,7 @@ Format and validate your configuration using the packer fmt and packer validate 
 
 packer fmt aws-ubuntu.pkr.hcl 
 packer validate aws-ubuntu.pkr.hcl
+
 Task 3: Create a Builder Block
 Builders are responsible for creating machines and generating images from them for various platforms. They are use in tandem with the source block within a template.
 
@@ -62,6 +69,7 @@ build {
     "source.amazon-ebs.ubuntu"
   ]
 }
+
 Task 4: Build a new Image using Packer
 The packer build command is used to initiate the image build process for a given Packer template. For this lab, please note that you will need credentials for your AWS account in order to properly execute a packer build. You can set your credentials using environment variables, using aws configure if you have the AWSCLI installed, or embed the credentials in the template.
 
